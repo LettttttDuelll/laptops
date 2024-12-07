@@ -1,0 +1,40 @@
+<footer th:fragment ="footer" class="bg-dark text-white mt-5">
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-md-3">
+                <h5>Liên hệ</h5>
+                <ul class="list-unstyled">
+                    <li>Địa chỉ: 123 Đường ABC, TP. XYZ</li>
+                    <li>Điện thoại: (0123) 456 789</li>
+                    <li>Email: support@laptopshop.com</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h5>Liên kết</h5>
+                <ul class="list-unstyled">
+                    <li><a href="@{/about}" class="text-white">Giới thiệu</a></li>
+                    <li><a href="@{/policy}" class="text-white">Chính sách bảo mật</a></li>
+                    <li><a href="@{/terms}" class="text-white">Điều khoản sử dụng</a></li>
+                    <li><a href="@{/returns}" class="text-white">Chính sách đổi trả</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h5>Kết nối với chúng tôi</h5>
+                <a href="@{https://facebook.com}" class="text-white me-3"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="@{https://instagram.com}" class="text-white me-3"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="@{https://twitter.com}" class="text-white"><i class="fab fa-twitter"></i> Twitter</a>
+            </div>
+
+            <div class="col-md-3">
+                <h5>Đăng ký nhận tin</h5>
+                <form>
+                    <input type="email" class="form-control mb-2" placeholder="Email của bạn">
+                    <button type="submit" class="btn btn-primary">Đăng ký</button>
+                </form>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <p>© 2024 Laptop Shop. Bảo lưu mọi quyền.</p>
+        </div>
+    </div>
+</footer>

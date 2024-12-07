@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Laptop List</title>
+    <link th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css}">
+    <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link
+        th:href="@{https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i}"
+        rel="stylesheet">
+    <link th:href="@{/css/sb-admin-2.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body>
+<header th:replace="~{fragments/header::header}"></header>
+<div class="container-fluid">
+    <div class="row">
+        <nav th:replace="~{fragments/sidebar::sidebar}"></nav>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
+            <div class="container mt-5">
+                <h2 class="text-center">Danh sách Laptop</h2>
+                <a th:href="@{/admin/addandupdate}" class="btn btn-primary mb-3">Thêm Laptop</a>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="laptop : ${laptopPT}">
+                        <td th:text="${laptop.laptop_id}"></td>
+                        <td th:text="${laptop.laptop_name}"></td>
+                        <td th:text="${laptop.formattedPrice}"></td><!--dấu phẩy-->
+                        <td>
+                            <a th:href="@{'/update/'+ ${laptop.laptop_id}}" class="btn btn-warning btn-sm">Sửa</a>
+                          <!-- <a th:href="@{/laptops/delete/{id}(id=${laptop.laptop_id})}" 
+                            class="btn btn-danger btn-sm" 
+                               onclick="return confirm('Bạn có chắc chắn muốn xóa laptop này?')">Xóa</a>--> 
+                               
+                               <button class="btn btn-danger btn-sm" 
+                               th:onclick="|deleteLaptop(${laptop.laptop_id})|">Xóa</button>
+                            <a th:href="@{'/details/'+ ${laptop.laptop_id}} " class="btn btn-primary">Chi tiết</a>
+                            <script>
+                                function deleteLaptop(laptopId) {
+                                    if (confirm('Bạn có chắc chắn muốn xóa laptop này?')) {
+                                        fetch(`/laptops/delete/${laptopId}`, {
+    method: 'DELETE'
+})
+.then(response => {
+    if (response.ok) {
+        alert('Xóa thành công!');
+        window.location.reload();  // Tải lại trang sau khi xóa thành công
+    } else {
+        alert('Xóa thất bại!');
+    }
+})
+.catch(error => {
+    alert('Có lỗi xảy ra: ' + error);
+});
+
+
+                                    }
+                                }
+                            </script>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            
+
+                <nav aria-label="...">
+                    <ul class="pagination justify-content-center">
+                      <li class="page-item" th:if="${currentPage > 1}">
+                        <a class="page-link" th:href="@{/laptops(page=${currentPage - 1})}">Previous</a>
+                      </li>
+
+                      <li class="page-item " th:each="i : ${#numbers.sequence(1, totalPages)}" >
+                        <a class="page-link" th:href="@{/laptops(page=${i})}" th:text="${i}"
+                        th:attr="style=${i == currentPage ? 'background-color: red; color: white;' : ''}"></a>
+                    </li>
+
+                      <li class="page-item" th:if="${currentPage < totalPages}">
+                        <a class="page-link" th:href="@{/laptops(page=${currentPage + 1})}">Next</a>
+                      </li>
+                    </ul>
+                  </nav>
+
+            </div>
+        </main>
+    </div>
+</div>
+<footer th:replace="~{fragments/footer::footer}"></footer>
+<script th:src="@{https://code.jquery.com/jquery-3.5.1.slim.min.js}"></script>
+<script th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js}"></script>
+<script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+<script th:src="@{https://cdn.jsdelivr.net/npm/chart.js}"></script>
+<script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.js}"></script>
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.js}"></script>
+<script th:src="@{/js/sb-admin-2.js}"></script>
+</body>
+</html>

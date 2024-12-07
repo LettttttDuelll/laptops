@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th = "https://www.thymeleaf.org">
+<head th:replace = "templates/cut/head::head" ></head>
+<body>
+    
+    <div class="container-fluid">
+        <div class="row">
+           
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Quản lý sản phẩm
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Đơn hàng
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Khách hàng
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Cài đặt
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+      
+            <main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-4">
+                <h2 class="mt-4">Dashboard</h2>
+
+              
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card text-white bg-primary mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Tổng doanh thu</h5>
+                                <p class="card-text">$<span th:text="${totalRevenue}">10000</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-white bg-success mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Sản phẩm bán ra</h5>
+                                <p class="card-text" th:text="${totalSoldProducts}">500</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-white bg-warning mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Đơn hàng chưa hoàn thành</h5>
+                                <p class="card-text" th:text="${pendingOrders}">30</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-white bg-danger mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Sản phẩm sắp hết hàng</h5>
+                                <p class="card-text" th:text="${lowStockProducts}">10</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+              
+                <h4 class="mt-4">Doanh thu theo tháng</h4>
+                <canvas id="salesChart"></canvas>
+                <script>
+                    var ctx = document.getElementById('salesChart').getContext('2d');
+                    var salesChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                            datasets: [{
+                                label: 'Doanh thu',
+                                data: [12000, 15000, 13000, 17000, 20000, 22000],
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 2,
+                                fill: false
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                </script>
+
+             
+                <h4 class="mt-4">Sản phẩm mới nhất</h4>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tên sản phẩm</th>
+                            <th scope="col">Giá</th>
+                            <th scope="col">Danh mục</th>
+                            <th scope="col">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="laptop : ${laptops}">
+                            <td th:text="${laptop.name}">Laptop A</td>
+                            <td th:text="${laptop.price}">1000</td>
+                            <td th:text="${laptop.category}">Laptop Gaming</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm">Sửa</a>
+                                <a href="#" class="btn btn-danger btn-sm">Xóa</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                
+                <h4 class="mt-4">Đơn hàng gần đây</h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Mã đơn hàng</th>
+                            <th scope="col">Tên khách hàng</th>
+                            <th scope="col">Trạng thái</th>
+                            <th scope="col">Tổng tiền</th>
+                            <th scope="col">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="order : ${orders}">
+                            <td th:text="${order.id}">ORD12345</td>
+                            <td th:text="${order.customerName}">Nguyễn Văn A</td>
+                            <td th:text="${order.status}">Đang xử lý</td>
+                            <td th:text="${order.totalAmount}">$500</td>
+                            <td>
+                                <a href="#" class="btn btn-info btn-sm">Chi tiết</a>
+                                <a href="#" class="btn btn-success btn-sm">Hoàn thành</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </main>
+        </div>
+    </div>
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html> 

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Laptop Details</title>
+    <link th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css}">
+    <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link
+        th:href="@{https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i}"
+        rel="stylesheet">
+
+    
+    <link th:href="@{/css/sb-admin-2.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body>
+<header th:replace="~{fragments/header::header}"></header>
+<div class="container-fluid">
+    <div class="row">
+        <nav th:replace="~{fragments/sidebar::sidebar}"></nav>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
+            <div class="container mt-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 >Chi Tiết Sản Phẩm: [[${laptop.laptop_name}]]</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- Thông tin Model -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                             <a href="#collapseProduct_Cpu" data-bs-toggle="collapse" role="button"  aria-controls="collapseProduct_Cpu" data-bs-target="#collapseProduct_Cpu" aria-expanded="false"><span>Bộ xử lý</span></a>
+                             <div id="collapseProduct_Cpu" class="collapse">
+                                 <ul class="list-group list-group-flush">
+                                     <li class="list-group-item">Công nghệ CPU: [[${laptop.cpu.cpu_technology}]]</li>
+                                     <li class="list-group-item">Số nhân: [[${laptop.cpu.num_cores}]]</li>
+                                     <li class="list-group-item">Số luồng: [[${laptop.cpu.num_threads}]]</li>
+                                     <li class="list-group-item">Tốc độ CPU: [[${laptop.cpu.cpu_speed}]]</li>
+                                     <li class="list-group-item">Tốc độ tối đa: [[${laptop.cpu.cpu_maxspeed}]]</li>
+                                     <li class="list-group-item">Bộ nhớ đệm: [[${laptop.cpu.cache_size}]]</li>
+                                 </ul>
+                             </div>
+                            </div>
+                        </div>
+            
+                        <!-- Thông tin RAM -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                             <a href="#collapseProduct_Ram" data-bs-toggle="collapse" role="button"  aria-controls="collapseProduct_Ram" data-bs-target="#collapseProduct_Ram" aria-expanded="false"><span>Bộ nhớ Ram , Ổ cứng </span></a>
+                             <div id="collapseProduct_Ram" class="collapse">
+                                 <ul class="list-group list-group-flush">
+                                     <li class="list-group-item">RAM: [[${laptop.ram.ram_min}]]</li>
+                                     <li class="list-group-item">Loại RAM: [[${laptop.ram.ram_type}]]</li>
+                                     <li class="list-group-item">Tốc độ Bus RAM: [[${laptop.ram.ram_speed}]]</li>
+                                     <li class="list-group-item">Hỗ trợ RAM tối đa: [[${laptop.ram.max_ram}]]</li>
+                                     <li class="list-group-item">Ổ cứng: [[${laptop.ram.ram_storage}]]</li>
+                                    
+                                 </ul>
+                             </div>
+                            </div>
+                        </div>
+            
+                        <!-- Thông tin Lưu trữ -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                             <a href="#collapseProduct_Screen" data-bs-toggle="collapse" role="button"  aria-controls="collapseProduct_Screen" data-bs-target="#collapseProduct_Screen" aria-expanded="false"><span>Màn Hình</span></a>
+                             <div id="collapseProduct_Screen" class="collapse">
+                                 <ul class="list-group list-group-flush">
+                                     <li class="list-group-item">Màn hình: [[${laptop.screen.screen_size}]]</li>
+                                     <li class="list-group-item">Độ phân giải: [[${laptop.screen.resolution}]]</li>
+                                     <li class="list-group-item">Tần số quét: [[${laptop.screen.refresh_rate}]]</li>
+                                     <li class="list-group-item">Độ phủ màu: [[${laptop.screen.color_coverage}]]</li>
+                                     <li class="list-group-item">Công nghệ màn hình: [[${laptop.screen.screen_technology}]]</li>
+                                 </ul>
+                             </div>
+                            </div>
+                        </div>
+            
+                        <div class="card mb-3">
+                            <div class="card-body">
+                             <a href="#collapseProduct_Graphics_audio" data-bs-toggle="collapse" role="button"  aria-controls="collapseProduct_Graphics_audio" data-bs-target="#collapseProduct_Graphics_audio" aria-expanded="false"><span>Đồ họa và âm thanh</span></a>
+                             <div id="collapseProduct_Graphics_audio" class="collapse">
+                                 <ul class="list-group list-group-flush">
+                                     <li class="list-group-item">Card màn hình: [[${laptop.graphics_audio.graphics_card}]]</li>
+                                     <li class="list-group-item">Công nghệ âm thanh: [[${laptop.graphics_audio.audio_technology}]]</li>
+                                 </ul>
+                             </div>
+                            </div>
+                        </div>
+            
+                        <!-- Thông tin Pin -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                             <a href="#collapseProduct_Port_features" data-bs-toggle="collapse" role="button"  aria-controls="collapseProduct_Port_features" data-bs-target="#collapseProduct_Port_features" aria-expanded="false"><span>Cổng kết nối & Tính năng mở rộng</span></a>
+                             <div id="collapseProduct_Port_features" class="collapse">
+                                 <ul class="list-group list-group-flush">
+                                     <li class="list-group-item">Cổng giao tiếp: [[${laptop.ports_features.port_type}]]</li>
+                                     <li class="list-group-item">Kết nối không dây: [[${laptop.ports_features.wireless_connection}]]</li>
+                                     <li class="list-group-item">Khe đọc thẻ nhớ: [[${laptop.ports_features.webcam}]]</li>
+                                     <li class="list-group-item">Web cam: [[${laptop.ports_features.extra_features}]]</li>
+                                     <li class="list-group-item">Đèn màn hình: [[${laptop.ports_features.keyboard_blacklight}]]</li>
+                                 </ul>
+                             </div>
+                            </div>
+                        </div>
+
+                        <div class="card mb-3">
+                            <div class="card-body">
+                             <a href="#collapseProduct_Dimension" data-bs-toggle="collapse" role="button"  aria-controls="collapseProduct_Dimension" data-bs-target="#collapseProduct_Dimension" aria-expanded="false"><span>Kích thước & khối lượng</span></a>
+                             <div id="collapseProduct_Dimension" class="collapse">
+                                 <ul class="list-group list-group-flush">
+                                     <li class="list-group-item">Kích thước: [[${laptop.dimension_weight.dimension}]]</li>
+                                     <li class="list-group-item">Khối lượng tịnh: [[${laptop.dimension_weight.weight}]]</li>
+                                     <li class="list-group-item">Chất liệu: [[${laptop.dimension_weight.material}]]</li>
+                                 </ul>
+                             </div>
+                            </div>
+                        </div>
+
+                        <div class="card mb-3">
+                            <div class="card-body">
+                             <a href="#collapseProduct_Other_info" data-bs-toggle="collapse" role="button"  aria-controls="collapseProduct_Other_info" data-bs-target="#collapseProduct_Other_info" aria-expanded="false"><span>Thông tin khác</span></a>
+                             <div id="collapseProduct_Other_info" class="collapse">
+                                 <ul class="list-group list-group-flush">
+                                     <li class="list-group-item">Thông tin pin: [[${laptop.other_info.batery_info}]]</li>
+                                     <li class="list-group-item">Công suất bộ sạc: [[${laptop.other_info.charger_power}]]</li>
+                                     <li class="list-group-item">Hệ điều hành: [[${laptop.other_info.operating_system}]]</li>
+                                     <li class="list-group-item">Thời điểm ra mắt: [[${laptop.other_info.release_date}]]</li>
+                                 </ul>
+                             </div>
+                            </div>
+                        </div>
+            
+                        <!-- Các nút hành động -->
+                        <a th:href="@{/laptops}" class="btn btn-secondary">Quay Lại</a>
+                        <a th:href="@{'/update/'+ ${laptop.laptop_id}}" class="btn btn-warning btn-sm">Sửa</a>
+                        <form action="/laptops/delete/${laptop.laptop_id}" method="post" style="display:inline-block;">
+                            <button type="submit" class="btn btn-danger">Xóa</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<footer th:replace="~{fragments/footer::footer}"></footer>
+<script th:src="@{https://cdn.jsdelivr.net/npm/chart.js}"></script>
+<script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.js}"></script>
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.js}"></script>
+<script th:src="@{/js/sb-admin-2.js}"></script>
+</body>
+</html>
